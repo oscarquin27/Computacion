@@ -1,0 +1,7 @@
+{
+  "docs": {
+    "Introducción": ["doc1"],
+    "El entorno de desarrollo": ["doc2"],
+    "Contenido": ["doc3", "doc4", "doc5"]
+  }
+}
