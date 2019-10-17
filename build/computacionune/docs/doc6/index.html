@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Condicionales · Computación IV,V y VI</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="En programación, una sentencia condicional es una instrucción o grupo de instrucciones que se pueden ejecutar o no en función del valor de una condición."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Condicionales · Computación IV,V y VI"/><meta property="og:type" content="website"/><meta property="og:url" content="https://oscarquin27.github.io/computacionune/"/><meta property="og:description" content="En programación, una sentencia condicional es una instrucción o grupo de instrucciones que se pueden ejecutar o no en función del valor de una condición."/><meta property="og:image" content="https://oscarquin27.github.io/computacionune/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://oscarquin27.github.io/computacionune/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/computacionune/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/computacionune/js/scrollSpy.js"></script><link rel="stylesheet" href="/computacionune/css/main.css"/><script src="/computacionune/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/computacionune/"><img class="logo" src="/computacionune/img/favicon.ico" alt="Computación IV,V y VI"/><h2 class="headerTitleWithLogo">Computación IV,V y VI</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/computacionune/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/computacionune/help" target="_self">Help</a></li><li class=""><a target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Contenido</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introducción</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc1">Introducción</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">El entorno de desarrollo</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc2">Entorno de desarrollo</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contenido</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc3">Hola Mundo</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc4">Variables</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc5">Operadores Matemáticos</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/computacionune/docs/doc6">Condicionales</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Condicionales</h1></header><article><div><span><p>En programación, una sentencia condicional es una instrucción o grupo de instrucciones que se pueden ejecutar o no en función del valor de una condición.
+Los tipos más conocidos de sentencias condicionales son el SI..ENTONCES (if..then), el SI..ENTONCES..SI NO (if..then..else) y el SEGÚN (case o switch), aunque también podríamos mencionar al manejo de excepciones como una alternativa más moderna para evitar el &quot;anidamiento&quot; de sentencias condicionales.</p>
+<h1><a class="anchor" aria-hidden="true" id="algunos-operadores-logicos-son-los-siguientes"></a><a href="#algunos-operadores-logicos-son-los-siguientes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Algunos operadores lógicos son los siguientes:</h1>
+<p>En este curso estaremos trabajando con los operadores lógicos siguientes:</p>
+<p><code>&amp;&amp;</code> Compuerta AND, <code>||</code> Compuerta OR, <code>!</code> Compuerta NOT, <code>!=</code> NOT EQUAL <br></p>
+<p>Ejemplo de un algoritmo que verifica si las edades de dos personas son mayores a 18 años:</p>
+<pre><code class="hljs css language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> edad1, edad2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Introduzca la edad 1 y 2: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad1);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad2);
+
+    <span class="hljs-keyword">if</span>(edad1 &gt; <span class="hljs-number">18</span> &amp;&amp; edad2 &gt; <span class="hljs-number">18</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Ambas edades son mayores a 18 años"</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>En este ejemplo solo verificamos si ambas edades son mayores a 18 años, pero si quisieramos saber cual es la otra posibilidad, en este caso, cuando
+ambas o al menos una de ellas no sea mayor de 18 podriamos hacer lo siguiente:</p>
+<pre><code class="hljs css language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> edad1, edad2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Introduzca la edad 1 y 2: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad1);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad2);
+
+    <span class="hljs-keyword">if</span>(edad1 &gt; <span class="hljs-number">18</span> &amp;&amp; edad2 &gt; <span class="hljs-number">18</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Ambas edades son mayores a 18 años"</span>);
+    }
+    <span class="hljs-keyword">else</span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Al menos una persona es menor a 18 años"</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Otra variante al mismo algoritmo podria ser el siguiente:</p>
+<pre><code class="hljs css language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> edad1, edad2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Introduzca la edad 1 y 2: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad1);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad2);
+
+    <span class="hljs-keyword">if</span>(edad1 &gt; <span class="hljs-number">18</span> &amp;&amp; edad2 &gt; <span class="hljs-number">18</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Ambas edades son mayores a 18 años"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(edad1 &lt; <span class="hljs-number">18</span> || edad2 &lt; <span class="hljs-number">18</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Al menos una persona es menor a 18 años"</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Este es un resultado valido mas poco eficiente ya que no tiene mucho sentido realizar este tipo de validacion pues se sabe
+que la opcion que faltaba es que al menos una persona fuera menor de edad. Ahora, si quisieramos saber quien es la persona cuya
+edad es menor a 18 entonces seria:</p>
+<pre><code class="hljs css language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> edad1, edad2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Introduzca la edad 1 y 2: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad1);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;edad2);
+
+    <span class="hljs-keyword">if</span>(edad1 &gt; <span class="hljs-number">18</span> &amp;&amp; edad2 &gt; <span class="hljs-number">18</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Ambas edades son mayores a 18 años"</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(edad1 &lt; <span class="hljs-number">18</span>){ <span class="hljs-comment">//Verificamos si la Persona 1 es menor de edad</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"La persona 1 es menor a 18 años"</span>);  
+    }
+    <span class="hljs-keyword">else</span> {  <span class="hljs-comment">// En caso contrario que ninguna se aplique, la Persona 2 es menor de edad</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"La persona 2 es menor a 18 años"</span>); 
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Los condicionales pueden ayudar a resolver problemas muy complejos en programación. Evidentemente ya que trabajamos con memoria, el conjunto
+de operacioens que podemos realizar por sentencia es limitado, pero rara vez se llega a ese límite. Aunque de ser asi se puede recurrir a métodos
+de simplificación mediante la lógica de computación, matemáticas discretas u otros mecanismos.</p>
+<p>Vamos a un ejercicio más complejo en el cual podamos utilizar todas las compuertas:</p>
+<pre><code class="hljs css language-c">
+<span class="hljs-comment">/*Calcular si el area de un triangulo da como resultado un numero par, de no ser asi debe ser convertido
+a un numero par si y solo si es mayor o igual a 10 o mayor a 1000, 
+luego debe ser sumado a otro numero proporcionado por el usuario. */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> base, altura, otro, resultado;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n Dame la altura y base de un triangulo: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;altura, &amp;base);
+
+    resultado = (base*altura)/<span class="hljs-number">2</span>;
+
+    <span class="hljs-keyword">if</span>((resultado%<span class="hljs-number">2</span>) != <span class="hljs-number">0</span> &amp;&amp; (resultado &gt;= <span class="hljs-number">10</span> || resultado &gt; <span class="hljs-number">1000</span>)){
+        resultado *= <span class="hljs-number">2</span>; <span class="hljs-comment">//Convertido a numero par</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nEl par es: %d "</span>, resultado); <span class="hljs-comment">//Mostramos el par</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nDiga otro numero: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;otro);
+        resultado += otro;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"El resultado es : %d"</span>, resultado);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/computacionune/docs/doc5"><span class="arrow-prev">← </span><span>Operadores Matemáticos</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/computacionune/" class="nav-home"><img src="/computacionune/img/favicon.ico" alt="Computación IV,V y VI" width="66" height="58"/></a><div><h5>Docs</h5><a href="/computacionune/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/computacionune/docs/en/doc2.html">Guides (or other categories)</a><a href="/computacionune/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/computacionune/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/computacionune/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/computacionune/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Your Name or Your Company Name</section></footer></div></body></html>
